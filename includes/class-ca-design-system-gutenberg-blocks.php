@@ -218,7 +218,7 @@ class CADesignSystemGutenbergBlocks
         $style = '';
 
         $per_page_feedback = "<div class=\"per-page-feedback-container\" style=\"background: background: #2F4C2C;
-\">PER PAGE FEEDBACK HERE</div>";
+\">$per_page_feedback</div>";
 
         $logo_small = "<div class=\"logo-small\"><a href=\"/\"></a></div>";
 
