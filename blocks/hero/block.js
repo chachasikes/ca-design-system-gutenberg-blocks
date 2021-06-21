@@ -18,33 +18,22 @@
     description: __("Featured content space. Appears on the homepage. Calls attention to a web page, announcement or event. Includes title text, brief description, image, and a button.", "ca-design-system"),
     attributes: {
       title: {
-        type: 'array',
-        source: 'children',
-        selector: 'h2'
+        type: 'string'
       },
       body: {
-        type: 'array',
-        source: 'children',
-        selector: 'p'
+        type: 'string'
       },
       buttontext: {
-        type: 'array',
-        source: 'children',
-        selector: 'a'
+        type: 'string'
       },
       buttonurl: {
-        type: 'array',
-        source: 'children',
-        selector: 'button'
+        type: 'string'
       },
       mediaID: {
-        type: 'number'
+        type: 'string'
       },
       mediaURL: {
-        type: 'string',
-        source: 'attribute',
-        selector: 'img',
-        attribute: 'src'
+        type: 'string'
       }
     },
     example: {
@@ -64,6 +53,9 @@
           mediaID: media.id
         });
       };
+
+      console.log("attributes", attributes);
+      
       return el('div', { className: 'cagov-with-sidebar cagov-with-sidebar-left cagov-featured-section cagov-bkgrd-gry' },
         el('div', {},
           el('div', { className: 'cagov-stack cagov-p-2 cagov-featured-sidebar' },
@@ -86,6 +78,7 @@
                 {
                   allowedBlocks: ['core/paragraph', 'core/button'],
                   onChange: function (value) {
+                    props.setAttributes({ value });
                     console.log(value);
                   }
                 }
@@ -116,27 +109,27 @@
         )
       );
     },
-    save: function (props) {
-      const attributes = props.attributes;
-      return el('div', { className: 'cagov-with-sidebar cagov-with-sidebar-left cagov-featured-section cagov-bkgrd-gry' },
-        el('div', {},
-          el('div', { className: 'cagov-stack cagov-p-2 cagov-featured-sidebar' },
-            { className: 'cagov-hero cagov-stack' },
-            el(RichText.Content, {
-              tagName: 'h2',
-              value: attributes.title
-            }),
-            el('div', { className: 'cagov-hero-body-content' },
-              el(editor.InnerBlocks.Content)
-            )
-          ),
-          attributes.mediaURL && el('div', { },
-            el('img', { className: 'cagov-featured-image', src: attributes.mediaURL }
-            )
-          )
-        )
-      );
-    }
+    // save: function (props) {
+    //   const attributes = props.attributes;
+    //   return el('div', { className: 'cagov-with-sidebar cagov-with-sidebar-left cagov-featured-section cagov-bkgrd-gry' },
+    //     el('div', {},
+    //       el('div', { className: 'cagov-stack cagov-p-2 cagov-featured-sidebar' },
+    //         { className: 'cagov-hero cagov-stack' },
+    //         el(RichText.Content, {
+    //           tagName: 'h2',
+    //           value: attributes.title
+    //         }),
+    //         el('div', { className: 'cagov-hero-body-content' },
+    //           el(editor.InnerBlocks.Content)
+    //         )
+    //       ),
+    //       attributes.mediaURL && el('div', { },
+    //         el('img', { className: 'cagov-featured-image', src: attributes.mediaURL }
+    //         )
+    //       )
+    //     )
+    //   );
+    // }
   });
 })(
   window.wp.blocks,
